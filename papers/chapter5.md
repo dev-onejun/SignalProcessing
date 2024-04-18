@@ -48,15 +48,56 @@ y[n] = \sum_{k=0}^M h[k] x[n-k]
 $$
 which is called a finite convolution sum.
 
-Usually, a star (*) represents the convolution operator for $-\infty < n < \infty$ by writing $y[n] = h[n] * x[n]$, reading the formula as "the output sequence y[n] is obtained by convolving the impulse response h[n] with the input sequence x[n]".
+Usually, a star (*) represents the convolution operator for $-\infty \lt n \lt \infty$ by writing $y[n] = h[n] * x[n]$, reading the formula as "the output sequence y[n] is obtained by convolving the impulse response h[n] with the input sequence x[n]".
 
 <!-- So, all the sampling signals can be addressed as a unit impulse signal so that their outputs are all called Impulse Response ??? -->
 
 Comparing two kinds of point average systems shows its effect clearly. When the input $x[n]$ has its period 8, while 7-point Average System removes the cosine function as making the difference between max and min smaller, 3-point Average System still presents its period obviously, smoothing both the start and the end slightly. In other words, the more the number of the point is close to the period, the more the periodic of the signal is disappear.
 
-LTI systems have three features: **1)** Time-Invariance, **2)** Linearity, and **3)** Causality. **Time-Invarianc** means tha the output sequence $w[n]$ is definitive regardless of the time shifting whether the its position is before the system or after the system. **Linearity** refers to both two properties, scaling and superposition. Similar with Time-Invariance, regardless of the position of scaling and superposition, $w[n]$ is definitive.Specifically, Scaling is presented as $\{\alpha > 0, \alpha \in R \ |\ \alpha x[n] \to \alpha y[n]\}$ and Superposition is represented as $\text{When } x_1[n] \to y_1[n] \text{ and } x_2[n] \to y_2[n] \text{ are given, } x_1[n] + x_2[n] \to y_1[n] + y_2[n] \text{ is satisfied}$. Causality is achieved by using present and past values except future values.
+LTI systems have three features: **1)** Time-Invariance, **2)** Linearity, and **3)** Causality. **Time-Invariance** means that the output sequence $w[n]$ is definitive regardless of the time shifting whether the its position is before the system or after the system. **Linearity** refers to both two properties, scaling and superposition. Similar with Time-Invariance, regardless of the position of scaling and superposition, $w[n]$ is definitive. Specifically, Scaling is presented as $\{\alpha > 0, \alpha \in R \ |\ \alpha x[n] \to \alpha y[n]\}$ and Superposition is represented as $\text{When } x_1[n] \to y_1[n] \text{ and } x_2[n] \to y_2[n] \text{ are given, } x_1[n] + x_2[n] \to y_1[n] + y_2[n] \text{ is satisfied}$. Causality is achieved by using present and past values except future values.
 
-In conclusion, LTI systems meet the following compound proposition; "The system is linear" $\equiv$ "If $x_1[n] \to y_1[n]$ and $x_2[n] \to y_2[n]$, then $\alpha x_1[n] + \beta x_2[n] \to \alpha y_1[n] + \beta y_2[n]$". The compound proposition is utilized to probe if the system is linear or not. For instance, $y[n] = x[n]^2$ is not linear. To probe this, let's assume that the system is linear. The scaling superposition of $x_1[n] \to x_1[n]^2$ and $x_2[n] \to x_2[n]^2$ should be same with $(\alpha x_1[n] + \beta x_2[n]) \to (\alpha x_1[n] + \beta x_2[n])^2$. However, the scaling superposition, applying scaling superpoisition after the system, is $\alpha (x_1n[n])^2 + \beta (x_2[n])^2$ so that the assumption was contradictory. Hence, the system is not linear.
+In conclusion, LTI systems meet the following compound proposition; "The system is linear" $\equiv$ "If $x_1[n] \mapsto y_1[n]$ and $x_2[n] \mapsto y_2[n]$, then $\alpha x_1[n] + \beta x_2[n] \mapsto \alpha y_1[n] + \beta y_2[n]$". The compound proposition is utilized to probe if the system is linear or not. For instance, $y[n] = x[n]^2$ is not linear. To probe this, let's assume that the system is linear. The scaling superposition of $x_1[n] \mapsto x_1[n]^2$ and $x_2[n] \mapsto x_2[n]^2$ should be same with $(\alpha x_1[n] + \beta x_2[n]) \mapsto (\alpha x_1[n] + \beta x_2[n])^2$. However, the scaling superposition, applying scaling superpoisition after the system, is $\alpha (x_1n[n])^2 + \beta (x_2[n])^2$ so that the assumption was contradictory. Hence, the system is not linear.
+
+The proposition, "All LTI systems have $h[n]$ and use convolution operations", is proved by the following LTI system relationships;
+
+$$
+\begin{array}{ccc}
+{
+\delta[n] \mapsto h[n] \text{Always True}\\
+\delta[n-1] \mapsto h[n-1] \\
+\cdots \\
+\delta[n-l] \mapsto h[n-l] \\
+\text{(Time Invariance)} \\
+} & {\implies} &
+{
+x[0] \delta[n] \mapsto x[0] h[n] \\
+x[1] \delta[n-1] \mapsto x[1] h[n-1] \\
+\cdots \\
+x[l] \delta[n-l] \mapsto x[l] h[n-l] \\
+\text{(Scaling)} \\
+} & {\implies} &
+{
+\sum_{l=-\infty}^\infty x[l] \delta[n-l] \mapsto \sum_{l=-\infty}^\infty x[l] h[n-l] \\
+= x[n] \mapsto y[n] \\
+\ \\
+y[n] = \sum_{l=-\infty}^\infty x[l] h[n-l] \\
+\text{The star(*) operation is defiend by the formula, } = x[n] * h[n]
+}
+\end{array}
+$$
+
+The star operation meets commutative property so that $x[n] * h[n] = h[n] * x[n]$:
+
+$$
+\begin{array}{cc}
+x[n] * h[n] = \sum_{l=-\infty}^\infty x[l] h[n-l] & \\
+= \sum_{k=\infty}^{-\infty} x[n-k] h[k] & \text{(k = n - l)} \\
+= \sum_{k=-\infty}^{\infty} x[n-k] h[k] = \sum_{k=-\infty}^{\infty} h[k] x[n-k] & \text{(Sigma Features)} \\
+= h[n] * x[n]
+\end{array}
+$$
+
+FIR is the subset of LTI systems where the number of the coefficients are finite from 0 to $M$. When the sum of the coefficients is 1, the filter is called an low-pass filter. If the sum of the coefficients is 0, the filter is referred to an high-pass filter.
 
 ---
 In images, although they do not have the time axis, smoothing with 3-point Average System is able while each pixel in either horizontal or vertical direction is considered as $n$.
