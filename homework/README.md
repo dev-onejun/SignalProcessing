@@ -21,3 +21,9 @@
 ### My Presentation
 
 * [[KeyNote](./EEG%20Emotion%20Recognition%20Via%20Ensemble%20Learning%20Representation.key)], [[pdf](./EEG%20Emotion%20Recognition%20Via%20Ensemble%20Learning%20Representation.pdf)]
+
+### References
+
+An additional Reference which is not in the presentation file
+
+* Li, Weishi, et al. "Deep model fusion: A survey." arXiv preprint arXiv:2309.15698 (2023).
